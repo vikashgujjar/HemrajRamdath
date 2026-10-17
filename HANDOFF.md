@@ -371,3 +371,14 @@ The cropped copies are in `site/assets/img/gallery/`. All nine images share one 
 **Permissions to confirm:**
 - **Trinidad Express:** the newspaper photo and caption are the Express's copyright, so the client needs the paper's permission, or should replace the image with a text link to the article.
 - **ASJA post:** the college's agreement to reuse its post, which shows staff.
+
+---
+
+## 13. Contact emails switched to caribrands.ca (17 Oct 2026, at the user's request)
+
+The site no longer mentions `hramdath@yahoo.com`:
+- **info@caribrands.ca:** "Order a copy by email", "Bulk & institutional orders", "Email an order", "Send a media enquiry", and the "Orders & media" contact line.
+- **raj@caribrands.ca:** "Invite Raj to speak" (contact row) and the "Speaking & Raj directly" contact line.
+- The hero's "Invite Raj to speak" button still scrolls to the Contact section.
+
+⚠️ **As of this change, caribrands.ca has no MX records, so mail to both addresses will bounce** until the mailboxes are created and the provider's DNS records are added at Rebel.com (see §8). After setup, send a test message to each address from an outside account (e.g. Gmail) to confirm delivery.
