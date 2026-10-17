@@ -1,0 +1,339 @@
+/* Caribrands.ca — Tailwind CSS v4 source.
+   Build:  npm run build   (writes site/assets/css/styles.css, minified)
+   Watch:  npm run dev
+
+   Theme: "archival ledger" — the book presented as an artefact in a Caribbean business archive.
+   Brand navy + gold, with two muted accents taken from the cover itself (clay path, sugar cane). */
+
+@import "tailwindcss" source(none);
+@source "../site/index.html";
+@source "../site/assets/js/main.js";
+
+/* JS-enhanced state: <html class="js"> is set inline in <head>. */
+@custom-variant js (&:where(.js, .js *));
+
+@theme {
+  /* ---- brand constants ---- */
+  --color-navy-950: #0A1422;
+  --color-navy-900: #102038;
+  --color-navy-800: #1A2E4A;   /* original brand navy */
+  --color-navy-700: #263F60;
+  --color-navy-300: #AEB9C9;
+  --color-gold-200: #F0DE9A;
+  --color-gold-300: #E4C85A;
+  --color-gold-500: #C8A000;   /* original brand gold */
+  --color-gold-700: #7A6100;   /* gold for text on light paper (AA) */
+  --color-clay-600: #8F4A30;
+  --color-cane-700: #4A6339;
+  --color-cream: #F6F1E6;
+
+  /* ---- semantic surfaces (swapped in dark mode below) ---- */
+  --color-paper: #F7F2E8;
+  --color-parchment: #EEE6D6;
+  --color-surface: #FFFCF6;
+  --color-ink: #15202F;
+  --color-ink-soft: #4E5866;
+  --color-rule: #DCD2BF;
+  --color-accent-ink: #7A6100;
+
+  /* ---- type ---- */
+  --font-display: "Gloock", Georgia, "Times New Roman", serif;
+  --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-sans: "Archivo", "Segoe UI", Arial, Helvetica, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  --text-kicker: 0.8125rem;   --text-kicker--line-height: 1.4;
+  --text-meta: 0.9375rem;     --text-meta--line-height: 1.55;
+  --text-body: 1.0625rem;     --text-body--line-height: 1.75;
+  --text-lede: clamp(1.1875rem, 1.6vw, 1.375rem);   --text-lede--line-height: 1.6;
+  --text-quote: clamp(1.25rem, 1.9vw, 1.5rem);      --text-quote--line-height: 1.5;
+  --text-feature: clamp(1.5rem, 2.8vw, 2.25rem);    --text-feature--line-height: 1.35;
+  --text-h3: clamp(1.75rem, 2.8vw, 2.25rem);        --text-h3--line-height: 1.12;
+  --text-h2: clamp(2.25rem, 4.6vw, 3.75rem);        --text-h2--line-height: 1.05;
+  --text-h1: clamp(2rem, 9vw, 3.5rem);              --text-h1--line-height: 1.04;
+  --text-h1-lg: clamp(3.25rem, 5.2vw, 4.5rem);      --text-h1-lg--line-height: 1.02;
+  --text-stat: clamp(2.5rem, 4.4vw, 3.5rem);        --text-stat--line-height: 1;
+
+  /* ---- layout ---- */
+  --container-page: 76rem;
+  --container-prose: 40rem;
+  --aspect-cover: 2 / 3;
+
+  /* ---- depth ---- */
+  --shadow-paper: 0 1px 2px rgb(21 32 47 / 0.06), 0 12px 32px -8px rgb(21 32 47 / 0.14);
+  --shadow-book: 0 30px 60px -20px rgb(0 0 0 / 0.55), 0 8px 18px -6px rgb(0 0 0 / 0.35);
+
+  --ease-editorial: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* ---------- base ---------- */
+@layer base {
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-paper: #0E1828;
+      --color-parchment: #121F33;
+      --color-surface: #16253B;
+      --color-ink: #E8EBF0;
+      --color-ink-soft: #A7B1BF;
+      --color-rule: #2A3A52;
+      --color-accent-ink: #E2BF3A;
+      color-scheme: dark;
+    }
+  }
+  html { scroll-padding-top: 5rem; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  body {
+    @apply bg-paper font-sans text-body text-ink antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--color-gold-300); color: var(--color-navy-950); }
+  :focus-visible { outline: 2px solid var(--color-gold-500); outline-offset: 3px; border-radius: 2px; }
+}
+
+/* ---------- reusable patterns ---------- */
+@utility page {
+  width: 100%;
+  max-width: var(--container-page);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+}
+@utility section-y { padding-block: clamp(4.5rem, 9vw, 8.5rem); }
+
+@utility kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-kicker);
+  line-height: var(--text-kicker--line-height);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+/* "§ 01" section mark that precedes a kicker */
+@utility mark-no {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: 0;
+  white-space: nowrap;
+  flex: none;
+}
+
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  min-height: 3.25rem;
+  padding-inline: 1.5rem;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+  & svg { width: 1.125rem; height: 1.125rem; flex: none; transition: transform 180ms var(--ease-editorial); }
+  &:hover svg { transform: translateX(3px); }
+}
+@utility btn-gold {
+  @apply btn bg-gold-500 text-navy-950 hover:bg-gold-300;
+}
+@utility btn-ink {
+  @apply btn bg-navy-800 text-cream hover:bg-navy-700;
+}
+@utility btn-line {
+  @apply btn border-ink/70 text-ink hover:border-ink hover:bg-ink hover:text-paper;
+}
+@utility btn-ghost {
+  @apply btn border-cream/40 text-cream hover:border-gold-300 hover:text-gold-200;
+}
+
+/* ---------- effects that utilities cannot express ---------- */
+@layer components {
+  /* Physical book: flat cover (true 2:3, never foreshortened) with stacked page edges and a spine highlight. */
+  .book-object {
+    position: relative;
+    isolation: isolate;
+    box-shadow:
+      5px 4px 0 -1px #F3EEE2,
+      9px 8px 0 -2px #E4DCC9,
+      13px 12px 0 -3px #D5CCB6,
+      var(--shadow-book);
+  }
+  .book-object::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgb(0 0 0 / 0.38) 0, rgb(255 255 255 / 0.22) 1.6%, rgb(0 0 0 / 0.12) 3.2%, transparent 7%);
+  }
+
+  /* Faint ledger rules behind the hero. */
+  .ledger-bg {
+    background-image: repeating-linear-gradient(to bottom, transparent 0 47px, rgb(200 160 0 / 0.07) 47px 48px);
+  }
+
+  /* Library catalogue card: punched hole at the foot. */
+  .catalogue-card::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0.875rem;
+    width: 0.875rem;
+    height: 0.875rem;
+    translate: -50% 0;
+    border-radius: 9999px;
+    background: var(--color-paper);
+    box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.25);
+  }
+
+  /* Request slip with a perforated top edge. */
+  .slip {
+    --perf: 7px;
+    -webkit-mask: radial-gradient(circle var(--perf) at 50% 0, transparent 98%, #000) 50% 0 / calc(var(--perf) * 3) 100% repeat-x;
+            mask: radial-gradient(circle var(--perf) at 50% 0, transparent 98%, #000) 50% 0 / calc(var(--perf) * 3) 100% repeat-x;
+  }
+
+  /* Drop cap for the first paragraph in the book section. */
+  .drop-cap::first-letter {
+    float: left;
+    font-family: var(--font-display);
+    font-size: 4.1em;
+    line-height: 0.82;
+    padding: 0.08em 0.1em 0 0;
+    color: var(--color-clay-600);
+  }
+  @media (prefers-color-scheme: dark) { .drop-cap::first-letter { color: var(--color-gold-300); } }
+
+  /* Navigation list. Display lives here (not in utilities) so the mobile panel rule below can override it;
+     without JS the links simply stay visible and wrap. */
+  .nav-menu { display: flex; flex-wrap: wrap; column-gap: 0.25rem; }
+  @media (width < 48rem) {
+    .js .nav-menu {
+      display: none;
+      position: absolute;
+      inset-inline: 0;
+      top: 100%;
+      flex-direction: column;
+      gap: 0;
+      padding: 0.5rem clamp(1rem, 4vw, 2.5rem) 1rem;
+      background: var(--color-navy-950);
+      border-bottom: 1px solid rgb(200 160 0 / 0.3);
+      box-shadow: 0 16px 32px rgb(0 0 0 / 0.3);
+    }
+    .js .nav-menu[data-open] { display: flex; }
+    .js .nav-menu a { padding-block: 0.9rem; font-size: 1rem; border-bottom: 1px solid rgb(246 241 230 / 0.08); }
+    .js .nav-menu li:last-child a { border-bottom: 0; }
+  }
+
+  /* Scroll reveal — only when motion is welcome and JS is running. */
+  @media (prefers-reduced-motion: no-preference) {
+    .js [data-reveal] {
+      opacity: 0;
+      translate: 0 18px;
+      transition: opacity 700ms var(--ease-editorial), translate 700ms var(--ease-editorial);
+    }
+    .js [data-reveal].is-visible { opacity: 1; translate: 0 0; }
+  }
+}
+
+/* =====================================================================
+   Signature details (round 4): motion and texture that make the page memorable.
+   Every animation is opt-in via prefers-reduced-motion: no-preference.
+   ===================================================================== */
+@keyframes rise   { from { opacity: 0; translate: 0 0.55em; } to { opacity: 1; translate: 0 0; } }
+@keyframes marquee { to { translate: -50% 0; } }
+@keyframes spin   { to { rotate: 360deg; } }
+
+@layer components {
+  /* Paper grain over the whole page — the "printed" feel. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.06;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Gold reading-progress rule under the navigation. */
+  .scroll-progress {
+    position: absolute;
+    inset-inline: 0;
+    bottom: -1px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-gold-500), var(--color-gold-300));
+    transform-origin: 0 50%;
+    transform: scaleX(var(--progress, 0));
+  }
+
+  /* Hero: warm lamp-light behind the book. */
+  .hero-glow {
+    background: radial-gradient(closest-side, rgb(200 160 0 / 0.26), rgb(200 160 0 / 0.07) 55%, transparent 78%);
+  }
+
+  /* Hero book: pointer-driven tilt (flat at rest, so the cover is never distorted). */
+  .tilt {
+    transform: perspective(1400px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: transform 600ms var(--ease-editorial);
+  }
+  .book-sheen {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at var(--mx, 30%) var(--my, 20%), rgb(255 255 255 / 0.28), transparent 55%);
+    mix-blend-mode: soft-light;
+    opacity: 0;
+    transition: opacity 400ms ease;
+  }
+  .tilt.is-active .book-sheen { opacity: 1; }
+
+  /* Gold button: a light sweep on hover. */
+  .btn-gold { position: relative; overflow: hidden; isolation: isolate; }
+  .btn-gold::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.5) 50%, transparent 70%);
+    translate: -120% 0;
+    transition: translate 800ms var(--ease-editorial);
+  }
+  .btn-gold:hover::after { translate: 120% 0; }
+
+  /* Ribbon of names from the book. */
+  .marquee-track { display: flex; width: max-content; }
+
+  /* Timeline rule that draws itself; highlighter that sweeps under a quote. */
+  .timeline-line { transform-origin: 0 50%; }
+  .marker {
+    background-image: linear-gradient(transparent 60%, rgb(200 160 0 / 0.38) 60%, rgb(200 160 0 / 0.38) 94%, transparent 94%);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -webkit-box-decoration-break: clone;
+            box-decoration-break: clone;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .rise { animation: rise 1s var(--ease-editorial) both; animation-delay: calc(var(--i, 0) * 110ms + 80ms); }
+    .marquee-track { animation: marquee 45s linear infinite; }
+    .marquee:hover .marquee-track, .marquee:focus-within .marquee-track { animation-play-state: paused; }
+    .spin-slow { animation: spin 30s linear infinite; }
+
+    .js .timeline-line { transform: scaleX(0); transition: transform 1.6s var(--ease-editorial) 0.25s; }
+    .js .is-visible .timeline-line { transform: scaleX(1); }
+
+    .js .marker { background-size: 0% 100%; transition: background-size 1.4s var(--ease-editorial) 0.5s; }
+    .js .is-visible .marker { background-size: 100% 100%; }
+
+    .js .img-reveal { clip-path: inset(0 0 100% 0); transition: clip-path 1.3s var(--ease-editorial) 0.1s; }
+    .js .is-visible .img-reveal { clip-path: inset(0 0 0 0); }
+  }
+}

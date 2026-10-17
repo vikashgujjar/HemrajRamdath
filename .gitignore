@@ -1,0 +1,7 @@
+node_modules/
+
+# Uncropped source screenshots: they contain private details (a local file path
+# with a Windows username, and a private Facebook user's name). The site uses
+# the cropped copies in site/assets/img/gallery/ instead.
+site/assets/img/3.jpeg
+site/assets/img/4.jpeg
