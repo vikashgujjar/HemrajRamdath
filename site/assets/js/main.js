@@ -102,27 +102,6 @@
     counters.forEach(function (el) { countIo.observe(el); });
   }
 
-  // Hero book follows the pointer (flat at rest; desktop pointers only)
-  var tilt = document.querySelector('[data-tilt]');
-  if (tilt && !reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    var area = tilt.closest('header') || tilt;
-    area.addEventListener('pointermove', function (e) {
-      var r = tilt.getBoundingClientRect();
-      var x = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (window.innerWidth / 2)));
-      var y = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / (window.innerHeight / 2)));
-      tilt.style.setProperty('--ry', (x * 9).toFixed(2) + 'deg');
-      tilt.style.setProperty('--rx', (-y * 6).toFixed(2) + 'deg');
-      tilt.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
-      tilt.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
-      tilt.classList.add('is-active');
-    });
-    area.addEventListener('pointerleave', function () {
-      tilt.style.setProperty('--ry', '0deg');
-      tilt.style.setProperty('--rx', '0deg');
-      tilt.classList.remove('is-active');
-    });
-  }
-
   // Gallery lightbox (native <dialog>: Esc closes, focus returns to the photo that opened it)
   var box = document.getElementById('lightbox');
   var items = Array.prototype.slice.call(document.querySelectorAll('.gallery-item'));
