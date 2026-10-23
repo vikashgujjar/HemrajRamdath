@@ -305,3 +305,23 @@
     .js .is-visible .img-reveal { clip-path: inset(0 0 0 0); }
   }
 }
+
+/* Hero carousel: slides share one grid cell, so the hero keeps the height of the tallest slide. */
+@layer components {
+  .hero-slide {
+    transition: opacity 700ms var(--ease-editorial), translate 700ms var(--ease-editorial), visibility 0s linear 700ms;
+  }
+  .js .hero-slide:not([data-active]) {
+    opacity: 0;
+    translate: 2rem 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .js .hero-slide[data-active] {
+    transition-delay: 0s;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-slide { transition: none; }
+    .js .hero-slide:not([data-active]) { translate: 0 0; }
+  }
+}
