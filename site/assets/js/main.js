@@ -102,64 +102,6 @@
     counters.forEach(function (el) { countIo.observe(el); });
   }
 
-  // Hero carousel: one slide visible at a time; inactive slides are inert so they can't take focus
-  var carousel = document.querySelector('[data-carousel]');
-  if (carousel) {
-    var slides = Array.prototype.slice.call(carousel.querySelectorAll('[data-slide]'));
-    var dots = Array.prototype.slice.call(carousel.querySelectorAll('[data-goto]'));
-    var pauseBtn = carousel.querySelector('[data-carousel-pause]');
-    var idx = 0, timer = null, userPaused = reduceMotion, hoverPaused = false;
-    var goTo = function (i) {
-      idx = (i + slides.length) % slides.length;
-      slides.forEach(function (s, n) {
-        var on = n === idx;
-        s.toggleAttribute('data-active', on);
-        s.inert = !on;
-        s.setAttribute('aria-hidden', on ? 'false' : 'true');
-      });
-      dots.forEach(function (d, n) {
-        if (n === idx) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
-      });
-    };
-    var stop = function () { clearInterval(timer); timer = null; };
-    var start = function () {
-      stop();
-      if (!userPaused && !hoverPaused && slides.length > 1) timer = setInterval(function () { goTo(idx + 1); }, 7000);
-    };
-    var syncPauseBtn = function () {
-      if (!pauseBtn) return;
-      pauseBtn.setAttribute('aria-label', userPaused ? 'Play automatic slide changes' : 'Pause automatic slide changes');
-      pauseBtn.querySelector('[data-icon-pause]').classList.toggle('hidden', userPaused);
-      pauseBtn.querySelector('[data-icon-play]').classList.toggle('hidden', !userPaused);
-    };
-    carousel.querySelector('[data-carousel-prev]').addEventListener('click', function () { goTo(idx - 1); start(); });
-    carousel.querySelector('[data-carousel-next]').addEventListener('click', function () { goTo(idx + 1); start(); });
-    dots.forEach(function (d) {
-      d.addEventListener('click', function () { goTo(parseInt(d.getAttribute('data-goto'), 10)); start(); });
-    });
-    if (pauseBtn) pauseBtn.addEventListener('click', function () { userPaused = !userPaused; syncPauseBtn(); start(); });
-    carousel.addEventListener('mouseenter', function () { hoverPaused = true; stop(); });
-    carousel.addEventListener('mouseleave', function () { hoverPaused = false; start(); });
-    carousel.addEventListener('focusin', function () { hoverPaused = true; stop(); });
-    carousel.addEventListener('focusout', function (e) { if (!carousel.contains(e.relatedTarget)) { hoverPaused = false; start(); } });
-    carousel.addEventListener('keydown', function (e) {
-      if (e.target.closest('a, input, textarea')) return;
-      if (e.key === 'ArrowLeft') { goTo(idx - 1); }
-      if (e.key === 'ArrowRight') { goTo(idx + 1); }
-    });
-    var touchX = null;
-    carousel.addEventListener('touchstart', function (e) { touchX = e.touches[0].clientX; }, { passive: true });
-    carousel.addEventListener('touchend', function (e) {
-      if (touchX === null) return;
-      var dx = e.changedTouches[0].clientX - touchX;
-      if (Math.abs(dx) > 50) { goTo(idx + (dx < 0 ? 1 : -1)); start(); }
-      touchX = null;
-    });
-    goTo(0);
-    syncPauseBtn();
-    start();
-  }
-
   // Book tabs (Inside the book): ARIA tab pattern; without JS both panels stay visible
   document.querySelectorAll('[data-tabs]').forEach(function (group) {
     var tabs = Array.prototype.slice.call(group.querySelectorAll('[data-tab]'));
