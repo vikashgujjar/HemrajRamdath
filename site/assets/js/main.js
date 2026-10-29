@@ -102,6 +102,62 @@
     counters.forEach(function (el) { countIo.observe(el); });
   }
 
+  // Praise carousel: a scroll-snap row; buttons, dots and a gentle autoplay drive it, swiping works natively
+  document.querySelectorAll('[data-quotes]').forEach(function (wrap) {
+    var track = wrap.querySelector('[data-quotes-track]');
+    var cards = Array.prototype.slice.call(track.querySelectorAll('[data-quote]'));
+    var dots = Array.prototype.slice.call(wrap.querySelectorAll('[data-quote-dot]'));
+    var prev = wrap.querySelector('[data-quote-prev]');
+    var next = wrap.querySelector('[data-quote-next]');
+    var count = wrap.querySelector('[data-quote-count]');
+    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+    var offset = function (i) { return cards[i].offsetLeft - cards[0].offsetLeft; };
+    var atEnd = function () { return track.scrollLeft >= track.scrollWidth - track.clientWidth - 4; };
+    var active = function () {
+      if (atEnd()) return cards.length - 1;
+      var best = 0;
+      cards.forEach(function (c, i) {
+        if (Math.abs(offset(i) - track.scrollLeft) < Math.abs(offset(best) - track.scrollLeft)) best = i;
+      });
+      return best;
+    };
+    var go = function (i) {
+      i = Math.max(0, Math.min(i, cards.length - 1));
+      track.scrollTo({ left: offset(i), behavior: reduceMotion ? 'auto' : 'smooth' });
+    };
+    var sync = function () {
+      var i = active();
+      dots.forEach(function (d, n) {
+        if (n === i) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
+      });
+      count.textContent = pad(i + 1) + ' / ' + pad(cards.length);
+      prev.disabled = track.scrollLeft <= 4;
+      next.disabled = atEnd();
+    };
+    var raf = false;
+    track.addEventListener('scroll', function () {
+      if (!raf) { raf = true; requestAnimationFrame(function () { raf = false; sync(); }); }
+    }, { passive: true });
+    prev.addEventListener('click', function () { go(active() - 1); });
+    next.addEventListener('click', function () { go(active() + 1); });
+    dots.forEach(function (d, i) { d.addEventListener('click', function () { go(i); }); });
+    window.addEventListener('resize', sync);
+    sync();
+
+    // Autoplay every 7s, looping back to the start; paused while pointer or focus is inside
+    if (!reduceMotion) {
+      var paused = false;
+      wrap.addEventListener('mouseenter', function () { paused = true; });
+      wrap.addEventListener('mouseleave', function () { paused = false; });
+      wrap.addEventListener('focusin', function () { paused = true; });
+      wrap.addEventListener('focusout', function (e) { if (!wrap.contains(e.relatedTarget)) paused = false; });
+      setInterval(function () {
+        if (paused || document.hidden) return;
+        if (atEnd()) go(0); else go(active() + 1);
+      }, 7000);
+    }
+  });
+
   // Book tabs (Inside the book): ARIA tab pattern; without JS both panels stay visible
   document.querySelectorAll('[data-tabs]').forEach(function (group) {
     var tabs = Array.prototype.slice.call(group.querySelectorAll('[data-tab]'));
