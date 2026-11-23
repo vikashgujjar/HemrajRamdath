@@ -32,7 +32,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Gloock&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap">
 <link rel="stylesheet" href="assets/css/styles.css">
-<link rel="preload" as="image" href="assets/img/upcomingEvent/TheCaribbeans50MostIconicBrandscover.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/upcomingEvent/iconic-brands-cover-900.jpg" fetchpriority="high">
 <script>document.documentElement.className += ' js';</script>
 
 <script type="application/ld+json">
@@ -136,7 +136,7 @@
         </div>
 
         <figure class="rise relative w-[min(64vw,15rem)] [--i:3] sm:w-64 lg:col-span-4 lg:w-full lg:max-w-[21rem] lg:justify-self-end">
-          <img class="aspect-[900/1165] w-full object-contain shadow-book" src="assets/img/upcomingEvent/TheCaribbeans50MostIconicBrandscover.jpg" srcset="assets/img/upcomingEvent/TheCaribbeans50MostIconicBrandscover.jpg 900w, assets/img/upcomingEvent/iconic-brands-cover-1400.jpg 1400w" sizes="(max-width: 1024px) 64vw, 336px" width="900" height="1165" fetchpriority="high" alt="Cover of The Caribbean’s 50 Most Iconic Brands by Hemraj Ramdath">
+          <img class="aspect-[900/1165] w-full object-contain shadow-book" src="assets/img/upcomingEvent/iconic-brands-cover-900.jpg" srcset="assets/img/upcomingEvent/iconic-brands-cover-900.jpg 900w, assets/img/upcomingEvent/iconic-brands-cover-1400.jpg 1400w" sizes="(max-width: 1024px) 64vw, 336px" width="900" height="1165" fetchpriority="high" alt="Cover of The Caribbean’s 50 Most Iconic Brands by Hemraj Ramdath">
           <figcaption class="mt-8 font-mono text-xs tracking-widest whitespace-nowrap text-navy-300 uppercase">ISBN 978-1-0658722-0-7</figcaption>
         </figure>
       </div>
@@ -238,7 +238,7 @@
     <!-- Open book: cover on the left page, introduction and figures on the right -->
     <div class="book-spread mt-12 grid overflow-hidden rounded-sm border border-rule bg-surface shadow-paper lg:mt-16 lg:grid-cols-2" data-reveal>
       <div class="flex flex-col items-center justify-center gap-8 bg-parchment px-6 pt-14 pb-10 sm:px-12 lg:py-16">
-        <img class="w-[min(60vw,15rem)] -rotate-2 shadow-book transition-transform duration-700 ease-editorial hover:rotate-0 sm:w-72" src="assets/img/upcomingEvent/TheCaribbeans50MostIconicBrandscover.jpg" width="900" height="1165" loading="lazy" alt="Cover of The Caribbean’s 50 Most Iconic Brands by Hemraj Ramdath">
+        <img class="w-[min(60vw,15rem)] -rotate-2 shadow-book transition-transform duration-700 ease-editorial hover:rotate-0 sm:w-72" src="assets/img/upcomingEvent/iconic-brands-cover-900.jpg" width="900" height="1165" loading="lazy" alt="Cover of The Caribbean’s 50 Most Iconic Brands by Hemraj Ramdath">
         <p class="font-mono text-xs tracking-widest text-ink-soft uppercase">ISBN 978-1-0658722-0-7</p>
       </div>
 
@@ -526,8 +526,21 @@
       <p class="max-w-md font-serif text-lede text-ink-soft italic lg:col-span-5 lg:justify-self-end">Presentations of <span class="not-italic">Beyond Indentureship</span>, including at The Alma Jordan Library, UWI St. Augustine.</p>
     </div>
 
+    <figure class="mx-auto mt-10 max-w-[25rem] sm:hidden">
+      <div class="relative bg-white pb-[calc(125%+214px)] shadow-paper">
+        <iframe class="absolute inset-0 size-full border-0" src="https://www.instagram.com/reel/DgD8cqOSGda/embed/" title="CBC News Barbados reel: the launch of The Caribbean’s 50 Most Iconic Brands" loading="lazy" scrolling="no" allow="encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <figcaption class="mt-3 text-meta text-ink-soft">CBC News Barbados at the launch of <i>The Caribbean’s 50 Most Iconic Brands</i>. <a class="font-semibold text-accent-ink" href="https://www.instagram.com/reel/DgD8cqOSGda/" target="_blank" rel="noopener">Watch on Instagram<span class="sr-only"> (opens in a new tab)</span></a></figcaption>
+    </figure>
     <p class="mt-10 flex items-center gap-2 text-meta text-ink-soft sm:hidden">Swipe to browse · tap a photo to enlarge<svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></p>
     <div class="gallery mt-4 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto pb-4 [scrollbar-width:none] sm:mt-12 sm:block sm:columns-2 sm:gap-5 sm:overflow-visible sm:pb-0 lg:mt-16 lg:columns-3" data-reveal>
+      <!-- Reel (CBC News Barbados, Instagram embed): 4:5 video + 214px of Instagram header and footer. Too tall for the phone swipe row, so phones get the copy above it; keep both in step -->
+      <figure class="break-inside-avoid max-sm:hidden sm:mb-5">
+        <div class="relative bg-white pb-[calc(125%+214px)] shadow-paper">
+          <iframe class="absolute inset-0 size-full border-0" src="https://www.instagram.com/reel/DgD8cqOSGda/embed/" title="CBC News Barbados reel: the launch of The Caribbean’s 50 Most Iconic Brands" loading="lazy" scrolling="no" allow="encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <figcaption class="mt-3 text-meta text-ink-soft">CBC News Barbados at the launch of <i>The Caribbean’s 50 Most Iconic Brands</i>. <a class="font-semibold text-accent-ink" href="https://www.instagram.com/reel/DgD8cqOSGda/" target="_blank" rel="noopener">Watch on Instagram<span class="sr-only"> (opens in a new tab)</span></a></figcaption>
+      </figure>
       <!-- Featured book: Beyond Indentureship, mounted like a framed print -->
       <figure class="group relative flex-none snap-start break-inside-avoid sm:mb-5">
         <button class="gallery-item relative block w-full cursor-zoom-in overflow-hidden bg-navy-900 p-10 max-sm:h-56 max-sm:w-auto max-sm:p-4 lg:p-12" type="button" data-full="assets/img/beyond-indentureship-cover.jpg">
@@ -549,6 +562,12 @@
         <figcaption class="mt-2 text-meta text-ink-soft max-sm:w-0 max-sm:min-w-full lg:pointer-events-none lg:absolute lg:inset-x-0 lg:bottom-0 lg:m-0 lg:translate-y-2 lg:bg-linear-to-t lg:from-navy-950/90 lg:to-transparent lg:p-5 lg:pt-14 lg:text-cream lg:opacity-0 lg:transition lg:duration-500 lg:group-focus-within:translate-y-0 lg:group-focus-within:opacity-100 lg:group-hover:translate-y-0 lg:group-hover:opacity-100">Presenting a copy of <i>Beyond Indentureship</i>.</figcaption>
       </figure>
       <figure class="group relative flex-none snap-start break-inside-avoid sm:mb-5">
+        <button class="gallery-item block w-full cursor-zoom-in overflow-hidden" type="button" data-full="assets/img/gallery/AtalBihari.jpg">
+          <img class="img-reveal h-auto w-full transition-transform duration-700 ease-editorial [--i:4] group-hover:scale-105 max-sm:h-56 max-sm:w-auto max-sm:max-w-none" src="assets/img/gallery/AtalBihari.jpg" width="768" height="820" loading="lazy" alt="Hemraj Ramdath with a colleague in front of an Atal Bihari Vajpayee School of Management and Entrepreneurship, Jawaharlal Nehru University banner">
+        </button>
+        <figcaption class="mt-2 text-meta text-ink-soft max-sm:w-0 max-sm:min-w-full lg:pointer-events-none lg:absolute lg:inset-x-0 lg:bottom-0 lg:m-0 lg:translate-y-2 lg:bg-linear-to-t lg:from-navy-950/90 lg:to-transparent lg:p-5 lg:pt-14 lg:text-cream lg:opacity-0 lg:transition lg:duration-500 lg:group-focus-within:translate-y-0 lg:group-focus-within:opacity-100 lg:group-hover:translate-y-0 lg:group-hover:opacity-100">At the Atal Bihari Vajpayee School of Management &amp; Entrepreneurship, Jawaharlal Nehru University.</figcaption>
+      </figure>
+      <figure class="group relative flex-none snap-start break-inside-avoid sm:mb-5">
         <button class="gallery-item block w-full cursor-zoom-in overflow-hidden" type="button" data-full="assets/img/gallery/presentation-guests-a-1600.jpg">
           <img class="img-reveal h-auto w-full transition-transform duration-700 ease-editorial [--i:2] group-hover:scale-105 max-sm:h-56 max-sm:w-auto max-sm:max-w-none" src="assets/img/gallery/presentation-guests-a-800.jpg" width="800" height="531" loading="lazy" alt="Hemraj Ramdath with two guests beside a lectern, in front of a map of Trinidad and Tobago and the flags of Trinidad and Tobago and Canada">
         </button>
@@ -559,12 +578,6 @@
           <img class="img-reveal h-auto w-full transition-transform duration-700 ease-editorial [--i:3] group-hover:scale-105 max-sm:h-56 max-sm:w-auto max-sm:max-w-none" src="assets/img/gallery/uwi-library-b-800.jpg" width="800" height="1067" loading="lazy" alt="Hemraj Ramdath holding copies of Beyond Indentureship with three people at The Alma Jordan Library, UWI St. Augustine">
         </button>
         <figcaption class="mt-2 text-meta text-ink-soft max-sm:w-0 max-sm:min-w-full lg:pointer-events-none lg:absolute lg:inset-x-0 lg:bottom-0 lg:m-0 lg:translate-y-2 lg:bg-linear-to-t lg:from-navy-950/90 lg:to-transparent lg:p-5 lg:pt-14 lg:text-cream lg:opacity-0 lg:transition lg:duration-500 lg:group-focus-within:translate-y-0 lg:group-focus-within:opacity-100 lg:group-hover:translate-y-0 lg:group-hover:opacity-100">At The Alma Jordan Library, UWI St. Augustine.</figcaption>
-      </figure>
-      <figure class="group relative flex-none snap-start break-inside-avoid sm:mb-5">
-        <button class="gallery-item block w-full cursor-zoom-in overflow-hidden" type="button" data-full="assets/img/gallery/AtalBihari.jpg">
-          <img class="img-reveal h-auto w-full transition-transform duration-700 ease-editorial [--i:4] group-hover:scale-105 max-sm:h-56 max-sm:w-auto max-sm:max-w-none" src="assets/img/gallery/AtalBihari.jpg" width="768" height="820" loading="lazy" alt="Hemraj Ramdath with a colleague in front of an Atal Bihari Vajpayee School of Management and Entrepreneurship, Jawaharlal Nehru University banner">
-        </button>
-        <figcaption class="mt-2 text-meta text-ink-soft max-sm:w-0 max-sm:min-w-full lg:pointer-events-none lg:absolute lg:inset-x-0 lg:bottom-0 lg:m-0 lg:translate-y-2 lg:bg-linear-to-t lg:from-navy-950/90 lg:to-transparent lg:p-5 lg:pt-14 lg:text-cream lg:opacity-0 lg:transition lg:duration-500 lg:group-focus-within:translate-y-0 lg:group-focus-within:opacity-100 lg:group-hover:translate-y-0 lg:group-hover:opacity-100">At the Atal Bihari Vajpayee School of Management &amp; Entrepreneurship, Jawaharlal Nehru University.</figcaption>
       </figure>
       <figure class="group relative flex-none snap-start break-inside-avoid sm:mb-5">
         <button class="gallery-item block w-full cursor-zoom-in overflow-hidden" type="button" data-full="assets/img/gallery/Diaspora.jpg">
